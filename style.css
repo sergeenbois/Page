@@ -1,0 +1,151 @@
+/* Reset basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Overall Body Style */
+body {
+    font-family: "Courier New", Courier, monospace; /* Console-like font */
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text for contrast */
+    line-height: 1.6;
+    padding: 0 20px;
+}
+
+/* Header Section */
+header {
+    text-align: center;
+    margin: 40px 0;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #00ff9d; /* Neon green */
+}
+
+header p {
+    font-size: 1.2em;
+    color: #b3b3b3; /* Muted white */
+}
+
+/* Navigation */
+nav ul {
+    list-style-type: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #00ff9d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #ff006e; /* Neon pink on hover */
+}
+
+/* Sections Styling */
+section {
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+section h2 {
+    color: #ff006e;
+    border-bottom: 2px solid #ff006e;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+section p, section ul {
+    margin-top: 10px;
+}
+
+/* Skills and Projects List */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background: #1d1d1d;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+}
+
+ul li a {
+    color: #00ff9d;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    color: #ff006e;
+}
+
+/* Contact Links */
+#contact ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+#contact ul li {
+    margin: 10px 0;
+}
+
+#contact ul li a {
+    color: #00ff9d;
+    text-decoration: none;
+}
+
+#contact ul li a:hover {
+    color: #ff006e;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8em;
+    color: #666666;
+}
+
+/* Hover Animations */
+a {
+    transition: color 0.3s ease;
+}
+
+/* Button and Link Glow Effect */
+a, button {
+    text-shadow: 0px 0px 5px rgba(0, 255, 157, 0.5); /* Neon green shadow */
+}
+
+a:hover, button:hover {
+    text-shadow: 0px 0px 8px rgba(255, 0, 110, 0.8); /* Neon pink on hover */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff006e; /* Scroll thumb in neon pink */
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ff9d; /* Turns neon green on hover */
+}
