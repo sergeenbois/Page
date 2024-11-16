@@ -7,25 +7,70 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <script>
-  // Add random values to each icon
-  document.querySelectorAll('.floating-icon').forEach(function(icon) {
-      let xDirection = Math.random() > 0.5 ? 1 : -1;  // Random horizontal direction
-      let yDirection = Math.random() > 0.5 ? 1 : -1;  // Random vertical direction
+  // Récupère toutes les icônes flottantes
+  const icons = document.querySelectorAll('.floating-icon');
 
-      // Calculate random speed and delay
-      let speed = Math.random() * 10 + 5; // Between 5s and 15s
-      let delay = Math.random() * 5; // Delay between 0s and 5s
+  // Fonction pour vérifier si deux éléments se chevauchent
+  function isColliding(icon1, icon2) {
+    const rect1 = icon1.getBoundingClientRect();
+    const rect2 = icon2.getBoundingClientRect();
 
-      // Apply animation dynamically with random values
+    // Vérifie si les deux rectangles (icônes) se chevauchent
+    return !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
+  }
+
+  // Fonction pour déplacer les icônes
+  function moveIcons() {
+    icons.forEach(icon => {
+      let xDirection = Math.random() > 0.5 ? 1 : -1;
+      let yDirection = Math.random() > 0.5 ? 1 : -1;
+
+      let speed = Math.random() * 5 + 3; // Entre 3s et 8s
+      let delay = Math.random() * 2; // Délai entre 0s et 2s
+      let movementDistance = 5; // Distance de déplacement à chaque frame
+
+      // Position initiale aléatoire
+      icon.style.left = Math.random() * window.innerWidth + 'px';
+      icon.style.top = Math.random() * window.innerHeight + 'px';
+
+      // Appliquer une animation pour le mouvement
       icon.style.animation = `floating ${speed}s infinite ${delay}s ease-in-out`;
 
-      // Start position for each icon
-      icon.style.top = Math.random() * window.innerHeight + 'px';
-      icon.style.left = Math.random() * window.innerWidth + 'px';
+      // Vérifie les collisions entre toutes les icônes
+      icons.forEach(otherIcon => {
+        if (icon !== otherIcon && isColliding(icon, otherIcon)) {
+          // Si une collision est détectée, inverse la direction de l'icône
+          xDirection *= -1;
+          yDirection *= -1;
 
-      // Keyframe animation to make the icon bounce
-      icon.style.animationName = 'floating';
-  });
+          // Déplace légèrement l'icône pour simuler un rebond
+          let iconRect = icon.getBoundingClientRect();
+          let otherIconRect = otherIcon.getBoundingClientRect();
+
+          if (iconRect.left < otherIconRect.left) {
+            icon.style.left = (iconRect.left + 10) + 'px';
+          } else {
+            icon.style.left = (iconRect.left - 10) + 'px';
+          }
+          if (iconRect.top < otherIconRect.top) {
+            icon.style.top = (iconRect.top + 10) + 'px';
+          } else {
+            icon.style.top = (iconRect.top - 10) + 'px';
+          }
+        }
+      });
+
+      // Déplacement constant de l'icône
+      icon.style.left = parseInt(icon.style.left) + xDirection * movementDistance + 'px';
+      icon.style.top = parseInt(icon.style.top) + yDirection * movementDistance + 'px';
+    });
+
+    // Répète la fonction de mouvement des icônes toutes les 50ms
+    setTimeout(moveIcons, 50);
+  }
+
+  // Initialiser le mouvement des icônes
+  moveIcons();
 </script>
 <body>
 
