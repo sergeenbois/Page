@@ -6,6 +6,27 @@
     <title>My Passions</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<script>
+  // Add random values to each icon
+  document.querySelectorAll('.floating-icon').forEach(function(icon) {
+      let xDirection = Math.random() > 0.5 ? 1 : -1;  // Random horizontal direction
+      let yDirection = Math.random() > 0.5 ? 1 : -1;  // Random vertical direction
+
+      // Calculate random speed and delay
+      let speed = Math.random() * 10 + 5; // Between 5s and 15s
+      let delay = Math.random() * 5; // Delay between 0s and 5s
+
+      // Apply animation dynamically with random values
+      icon.style.animation = `floating ${speed}s infinite ${delay}s ease-in-out`;
+
+      // Start position for each icon
+      icon.style.top = Math.random() * window.innerHeight + 'px';
+      icon.style.left = Math.random() * window.innerWidth + 'px';
+
+      // Keyframe animation to make the icon bounce
+      icon.style.animationName = 'floating';
+  });
+</script>
 <body>
 
     <h1 style="text-align: center; margin-top: 50px;">My Passions</h1>
