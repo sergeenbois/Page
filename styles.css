@@ -150,39 +150,56 @@ a:hover, button:hover {
     background: #00ff9d; /* Turns neon green on hover */
 }
 
+/* New Categories Section */
 .container {
     display: flex;
-    justify-content: space-between;
-    margin: 50px;
+    justify-content: space-around;
+    margin: 50px 0;
 }
 
 .category {
-    width: 30%;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #1d1d1d;
+    color: #e0e0e0; /* La couleur du texte suivie de styles.css */
     text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .category-img {
-    width: 60%; /* Réduit la taille des images à 60% de leur taille originale */
+    width: 50%; /* Réduit encore plus la taille des images */
     height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
 .category h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 1.2em; /* Ajuste la taille pour que le texte soit plus petit */
+    color: #00ff9d; /* Neon green (la couleur définie dans styles.css pour le titre) */
+    margin: 10px 0;
 }
 
 .category p {
-    font-size: 1.2em;
-    color: #666;
+    font-size: 1em; /* Taille réduite pour le texte */
+    color: #b3b3b3; /* Couleur du texte selon le style général */
 }
 
+/* Hover effect on categories */
 .category:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05); /* Légère animation pour agrandir l'élément */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .category {
+        width: 80%; /* Plus large sur les petits écrans */
+        margin-bottom: 20px;
+    }
 }
