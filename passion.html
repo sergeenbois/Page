@@ -6,125 +6,70 @@
     <title>My Passions</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f7f9fc;
-            color: #333;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
-
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 3em;
-            color: #0056b3;
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px;
         }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        .category {
+            width: 30%;
             padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .card {
-            background-color: #ffffff;
+            background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            overflow: hidden;
-            position: relative;
+            text-align: center;
         }
-
-        .card img {
-            width: 100%;
+        .category img {
+            width: 80%;
             height: auto;
             border-radius: 10px;
+            margin-bottom: 20px;
         }
-
-        .card h2 {
-            margin-top: 10px;
-            font-size: 1.8em;
+        .category h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
             color: #333;
         }
-
-        .card p {
-            margin: 10px 0;
-            line-height: 1.5;
+        .category p {
+            font-size: 1.2em;
+            color: #666;
         }
-
-        .quote {
-            font-style: italic;
-            margin-top: 10px;
-            color: #555;
-        }
-
-        .quote::before, .quote::after {
-            content: '"';
-            font-size: 1.5em;
-            vertical-align: top;
-            color: #999;
+        .category:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
 <body>
-    <h1>My Passions</h1>
-    <div class="grid">
-        <!-- Mathématiques -->
-        <div class="card">
-            <h2>Mathématiques</h2>
-            <p>Depuis toujours, les mathématiques m'ont fasciné. J'adore explorer des théorèmes complexes, comprendre la beauté des structures abstraites, et résoudre des problèmes qui demandent une réflexion logique.</p>
+
+    <h1 style="text-align: center; margin-top: 50px;">My Passions</h1>
+
+    <div class="container">
+        <!-- Sciences Category -->
+        <div class="category">
+            <img src="https://github.com/sergeenbois/Page/blob/ressource/AI.jpg?raw=true" alt="AI">
+            <h3>Sciences</h3>
+            <p>Artificial Intelligence, Quantum Physics, and more!</p>
         </div>
 
-        <!-- Livres -->
-        <div class="card">
-            <img src="https://source.unsplash.com/600x400/?books" alt="Livres">
-            <h2>Livres</h2>
-            <p>Je dévore des classiques comme *Les Misérables* ou des mangas comme *One Piece*. Chaque livre m'ouvre un nouvel univers, riche et unique.</p>
-            <p class="quote">"Un homme sans rêve est un homme sans avenir." - Monkey D. Luffy</p>
+        <!-- Culture Category -->
+        <div class="category">
+            <img src="https://github.com/sergeenbois/Page/blob/ressource/Cinema.jpg?raw=true" alt="Cinema">
+            <h3>Culture</h3>
+            <p>Movies, Books, Philosophy, and much more!</p>
         </div>
 
-        <!-- Films -->
-        <div class="card">
-            <img src="https://source.unsplash.com/600x400/?movies" alt="Films">
-            <h2>Films</h2>
-            <p>Du cinéma d'auteur aux blockbusters comme *Star Wars : La Revanche des Sith*, les films me transportent et nourrissent mon imagination.</p>
-        </div>
-
-        <!-- Philosophie -->
-        <div class="card">
-            <h2>Philosophie</h2>
-            <p>La philosophie me permet de réfléchir sur des concepts fondamentaux de la vie, du bonheur, et de l'existence. Des penseurs comme Kant, Nietzsche ou Camus m'ont beaucoup influencé.</p>
-        </div>
-
-        <!-- IA -->
-        <div class="card">
-            <img src="https://source.unsplash.com/600x400/?ai,technology" alt="IA">
-            <h2>Intelligence Artificielle</h2>
-            <p>L'IA me fascine : apprendre des machines, modéliser l'intelligence, et explorer les possibilités du futur avec des technologies comme le machine learning et le deep learning.</p>
-        </div>
-
-        <!-- Foot -->
-        <div class="card">
-            <img src="https://source.unsplash.com/600x400/?soccer" alt="Foot">
-            <h2>Football</h2>
-            <p>Passionné de football, j'aime non seulement regarder les matchs mais aussi analyser les tactiques et comprendre les dynamiques des équipes.</p>
-        </div>
-
-        <!-- Physique Quantique -->
-        <div class="card">
-            <h2>Physique Quantique</h2>
-            <p>Le monde quantique me fascine. Concepts comme la superposition et l'intrication remettent en question notre compréhension de la réalité.</p>
-        </div>
-
-        <!-- Jeux Vidéos -->
-        <div class="card">
-            <img src="https://source.unsplash.com/600x400/?gaming" alt="Jeux Vidéos">
-            <h2>Jeux Vidéos</h2>
-            <p>Du rétro-gaming à des expériences immersives modernes, les jeux vidéos sont pour moi un mélange parfait d'art, d'histoire et de technologie.</p>
+        <!-- Sports Category -->
+        <div class="category">
+            <img src="https://github.com/sergeenbois/Page/blob/ressource/Football.png?raw=true" alt="Football">
+            <h3>Sports</h3>
+            <p>Football, Tennis, Volley, and other sports!</p>
         </div>
     </div>
+
 </body>
 </html>
