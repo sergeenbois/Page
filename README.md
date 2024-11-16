@@ -17,7 +17,7 @@ Welcome to my personal portfolio repository! This page is dedicated to showcasin
 
 1. Clone this repository: 
    ```bash
-   git clone https://github.com/username/my-portfolio.git
+   git clone https://github.com/sergeenbois/Page.git
    ```
 2. Open `index.html` in your preferred browser to view the homepage locally.
 3. Optionally, you may use a local server to view the pages:
