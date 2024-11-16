@@ -203,3 +203,91 @@ a:hover, button:hover {
         margin-bottom: 20px;
     }
 }
+/* Floating Icons Section */
+#floating-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Place les icônes derrière le contenu principal */
+    pointer-events: none; /* Permet d'interagir avec le contenu par-dessus */
+    width: 100vw;
+    height: 100vh;
+}
+
+.floating-icon {
+    position: absolute;
+    width: 100px; /* Taille des icônes */
+    height: auto;
+    animation: floatAnimation 10s infinite linear;
+}
+
+/* Animation for floating icons */
+@keyframes floatAnimation {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    25% {
+        transform: translateX(100vw) translateY(50vh);
+    }
+    50% {
+        transform: translateX(0) translateY(100vh);
+    }
+    75% {
+        transform: translateX(-100vw) translateY(50vh);
+    }
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+}
+
+/* Randomize the delay and speed for each icon */
+.floating-icon:nth-child(1) {
+    animation-duration: 12s;
+    animation-delay: 0s;
+}
+
+.floating-icon:nth-child(2) {
+    animation-duration: 10s;
+    animation-delay: 1s;
+}
+
+.floating-icon:nth-child(3) {
+    animation-duration: 15s;
+    animation-delay: 2s;
+}
+
+.floating-icon:nth-child(4) {
+    animation-duration: 13s;
+    animation-delay: 3s;
+}
+
+.floating-icon:nth-child(5) {
+    animation-duration: 14s;
+    animation-delay: 4s;
+}
+
+.floating-icon:nth-child(6) {
+    animation-duration: 16s;
+    animation-delay: 5s;
+}
+
+.floating-icon:nth-child(7) {
+    animation-duration: 11s;
+    animation-delay: 6s;
+}
+
+.floating-icon:nth-child(8) {
+    animation-duration: 18s;
+    animation-delay: 7s;
+}
+
+.floating-icon:nth-child(9) {
+    animation-duration: 17s;
+    animation-delay: 8s;
+}
+
+.floating-icon:nth-child(10) {
+    animation-duration: 19s;
+    animation-delay: 9s;
+}
+
