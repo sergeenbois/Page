@@ -7,130 +7,123 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f7f9fc;
             color: #333;
-            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         h1 {
             text-align: center;
             margin-top: 20px;
             font-size: 3em;
-            animation: colorChange 5s infinite;
+            color: #0056b3;
         }
 
-        @keyframes colorChange {
-            0%, 100% { color: #007BFF; }
-            25% { color: #FF5733; }
-            50% { color: #33FF57; }
-            75% { color: #FFC300; }
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            margin: 40px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
         }
 
         .card {
-            position: relative;
-            width: 200px;
-            height: 200px;
             background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             overflow: hidden;
-            transform: rotate(calc(var(--rotate, 0) * 1deg));
-            animation: float 3s ease-in-out infinite;
+            position: relative;
         }
 
         .card img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7);
+            height: auto;
+            border-radius: 10px;
         }
 
-        .card:hover img {
-            filter: brightness(1);
+        .card h2 {
+            margin-top: 10px;
+            font-size: 1.8em;
+            color: #333;
         }
 
-        .card span {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            font-size: 1.2em;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        .card p {
+            margin: 10px 0;
+            line-height: 1.5;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(calc(var(--rotate, 0) * 1deg)); }
-            50% { transform: translateY(-10px) rotate(calc(var(--rotate, 0) * 1deg)); }
+        .quote {
+            font-style: italic;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .quote::before, .quote::after {
+            content: '"';
+            font-size: 1.5em;
+            vertical-align: top;
+            color: #999;
         }
     </style>
 </head>
 <body>
     <h1>My Passions</h1>
-    <div class="container">
-        <!-- Passions Cards -->
-        <div class="card" style="--rotate: 2;">
-            <img src="https://source.unsplash.com/200x200/?music" alt="Music">
-            <span>Musiques</span>
+    <div class="grid">
+        <!-- Mathématiques -->
+        <div class="card">
+            <h2>Mathématiques</h2>
+            <p>Depuis toujours, les mathématiques m'ont fasciné. J'adore explorer des théorèmes complexes, comprendre la beauté des structures abstraites, et résoudre des problèmes qui demandent une réflexion logique.</p>
         </div>
-        <div class="card" style="--rotate: -3;">
-            <img src="https://source.unsplash.com/200x200/?books" alt="Books">
-            <span>Livres</span>
+
+        <!-- Livres -->
+        <div class="card">
+            <img src="https://source.unsplash.com/600x400/?books" alt="Livres">
+            <h2>Livres</h2>
+            <p>Je dévore des classiques comme *Les Misérables* ou des mangas comme *One Piece*. Chaque livre m'ouvre un nouvel univers, riche et unique.</p>
+            <p class="quote">"Un homme sans rêve est un homme sans avenir." - Monkey D. Luffy</p>
         </div>
-        <div class="card" style="--rotate: 5;">
-            <img src="https://source.unsplash.com/200x200/?movies" alt="Movies">
-            <span>Films</span>
+
+        <!-- Films -->
+        <div class="card">
+            <img src="https://source.unsplash.com/600x400/?movies" alt="Films">
+            <h2>Films</h2>
+            <p>Du cinéma d'auteur aux blockbusters comme *Star Wars : La Revanche des Sith*, les films me transportent et nourrissent mon imagination.</p>
         </div>
-        <div class="card" style="--rotate: -6;">
-            <img src="https://source.unsplash.com/200x200/?series" alt="Series">
-            <span>Séries</span>
+
+        <!-- Philosophie -->
+        <div class="card">
+            <h2>Philosophie</h2>
+            <p>La philosophie me permet de réfléchir sur des concepts fondamentaux de la vie, du bonheur, et de l'existence. Des penseurs comme Kant, Nietzsche ou Camus m'ont beaucoup influencé.</p>
         </div>
-        <div class="card" style="--rotate: 3;">
-            <img src="https://source.unsplash.com/200x200/?soccer" alt="Soccer">
-            <span>Foot</span>
+
+        <!-- IA -->
+        <div class="card">
+            <img src="https://source.unsplash.com/600x400/?ai,technology" alt="IA">
+            <h2>Intelligence Artificielle</h2>
+            <p>L'IA me fascine : apprendre des machines, modéliser l'intelligence, et explorer les possibilités du futur avec des technologies comme le machine learning et le deep learning.</p>
         </div>
-        <div class="card" style="--rotate: -2;">
-            <img src="https://source.unsplash.com/200x200/?volleyball" alt="Volley">
-            <span>Volley</span>
+
+        <!-- Foot -->
+        <div class="card">
+            <img src="https://source.unsplash.com/600x400/?soccer" alt="Foot">
+            <h2>Football</h2>
+            <p>Passionné de football, j'aime non seulement regarder les matchs mais aussi analyser les tactiques et comprendre les dynamiques des équipes.</p>
         </div>
-        <div class="card" style="--rotate: 4;">
-            <img src="https://source.unsplash.com/200x200/?technology" alt="YouTube">
-            <span>Ytb</span>
+
+        <!-- Physique Quantique -->
+        <div class="card">
+            <h2>Physique Quantique</h2>
+            <p>Le monde quantique me fascine. Concepts comme la superposition et l'intrication remettent en question notre compréhension de la réalité.</p>
         </div>
-        <div class="card" style="--rotate: -5;">
-            <img src="https://source.unsplash.com/200x200/?math" alt="Math">
-            <span>Mathématiques</span>
-        </div>
-        <div class="card" style="--rotate: 1;">
-            <img src="https://source.unsplash.com/200x200/?ai" alt="AI">
-            <span>IA</span>
-        </div>
-        <div class="card" style="--rotate: -4;">
-            <img src="https://source.unsplash.com/200x200/?physics" alt="Quantum Physics">
-            <span>Physique Quantique</span>
-        </div>
-        <div class="card" style="--rotate: 6;">
-            <img src="https://source.unsplash.com/200x200/?philosophy" alt="Philosophy">
-            <span>Philosophie</span>
-        </div>
-        <div class="card" style="--rotate: -1;">
-            <img src="https://source.unsplash.com/200x200/?sociology" alt="Sociology">
-            <span>Sociologie</span>
-        </div>
-        <div class="card" style="--rotate: 7;">
-            <img src="https://source.unsplash.com/200x200/?economy" alt="Economy">
-            <span>Économie</span>
-        </div>
-        <div class="card" style="--rotate: -3;">
-            <img src="https://source.unsplash.com/200x200/?gaming" alt="Gaming">
-            <span>Jeux Vidéos</span>
+
+        <!-- Jeux Vidéos -->
+        <div class="card">
+            <img src="https://source.unsplash.com/600x400/?gaming" alt="Jeux Vidéos">
+            <h2>Jeux Vidéos</h2>
+            <p>Du rétro-gaming à des expériences immersives modernes, les jeux vidéos sont pour moi un mélange parfait d'art, d'histoire et de technologie.</p>
         </div>
     </div>
 </body>
