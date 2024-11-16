@@ -168,7 +168,7 @@ a:hover, button:hover {
 }
 
 .category-img {
-    width: 50%; /* Réduit encore plus la taille des images */
+    width: 20%; /* Réduit encore plus la taille des images */
     height: auto;
     border-radius: 8px;
     margin-bottom: 15px;
