@@ -203,97 +203,29 @@ a:hover, button:hover {
         margin-bottom: 20px;
     }
 }
-/* Floating Icons Section */
+
 #floating-icons {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1; /* Place les icônes derrière le contenu principal */
-    pointer-events: none; /* Permet d'interagir avec le contenu par-dessus */
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Make sure the icons don't block interactions */
+    z-index: -1; /* Place behind other content */
 }
 
 .floating-icon {
     position: absolute;
-    width: 100px; /* Taille des icônes */
+    width: 150px; /* Adjust the size as needed */
     height: auto;
-    animation: floatAnimation 10s infinite linear;
+    transition: transform 0.3s ease;
 }
-
-/* Set up the basic floating icon animation */
-@keyframes floating {
-    0% {
-        transform: translate(0, 0);
-    }
-    25% {
-        transform: translate(calc(100vw * (random() - 0.5)), calc(100vh * (random() - 0.5)));
-    }
-    50% {
-        transform: translate(calc(100vw * (random() - 0.5)), calc(100vh * (random() - 0.5)));
-    }
-    75% {
-        transform: translate(calc(100vw * (random() - 0.5)), calc(100vh * (random() - 0.5)));
-    }
-    100% {
-        transform: translate(0, 0);
-    }
+#tv-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Assure que le canvas ne bloque pas les interactions */
+    z-index: -1; /* Place derrière autres contenus */
 }
-
-/* Randomize the delay and speed for each icon */
-.floating-icon {
-    position: absolute;
-    animation: floating infinite;
-    animation-timing-function: ease-in-out;
-}
-
-.floating-icon:nth-child(1) {
-    animation-duration: 12s;
-    animation-delay: 0s;
-}
-
-.floating-icon:nth-child(2) {
-    animation-duration: 10s;
-    animation-delay: 1s;
-}
-
-.floating-icon:nth-child(3) {
-    animation-duration: 15s;
-    animation-delay: 2s;
-}
-
-.floating-icon:nth-child(4) {
-    animation-duration: 13s;
-    animation-delay: 3s;
-}
-
-.floating-icon:nth-child(5) {
-    animation-duration: 14s;
-    animation-delay: 4s;
-}
-
-.floating-icon:nth-child(6) {
-    animation-duration: 16s;
-    animation-delay: 5s;
-}
-
-.floating-icon:nth-child(7) {
-    animation-duration: 11s;
-    animation-delay: 6s;
-}
-
-.floating-icon:nth-child(8) {
-    animation-duration: 18s;
-    animation-delay: 7s;
-}
-
-.floating-icon:nth-child(9) {
-    animation-duration: 17s;
-    animation-delay: 8s;
-}
-
-.floating-icon:nth-child(10) {
-    animation-duration: 19s;
-    animation-delay: 9s;
-}
-
