@@ -6,124 +6,35 @@
     <title>My Passions</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<script>
-  // Récupère toutes les icônes flottantes
-  const icons = document.querySelectorAll('.floating-icon');
-
-  // Fonction pour déplacer les icônes
-  function moveIcons() {
-    icons.forEach(icon => {
-      let xDirection = Math.random() > 0.5 ? 1 : -1;
-      let yDirection = Math.random() > 0.5 ? 1 : -1;
-
-      let speed = Math.random() * 3 + 2; // Vitesse aléatoire entre 2s et 5s
-      let movementDistance = 3; // Distance de déplacement par "frame"
-
-      // Position initiale aléatoire
-      icon.style.position = 'absolute';
-      icon.style.left = Math.random() * (window.innerWidth - 50) + 'px';
-      icon.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-
-      // Applique une animation à l'icône
-      icon.style.animation = `floating ${speed}s infinite ease-in-out`;
-
-      // Détection de collisions
-      icons.forEach(otherIcon => {
-        if (icon !== otherIcon && isColliding(icon, otherIcon)) {
-          // Si une collision est détectée, inverse les directions
-          xDirection *= -1;
-          yDirection *= -1;
-          
-          // Réajuste la position pour éviter les collisions
-          let iconRect = icon.getBoundingClientRect();
-          let otherIconRect = otherIcon.getBoundingClientRect();
-
-          // Pour éviter les collisions, déplace les icônes un peu plus loin
-          if (iconRect.left < otherIconRect.left) {
-            icon.style.left = (iconRect.left + 15) + 'px';
-          } else {
-            icon.style.left = (iconRect.left - 15) + 'px';
-          }
-          if (iconRect.top < otherIconRect.top) {
-            icon.style.top = (iconRect.top + 15) + 'px';
-          } else {
-            icon.style.top = (iconRect.top - 15) + 'px';
-          }
-        }
-      });
-
-      // Appliquer le mouvement continu
-      let iconRect = icon.getBoundingClientRect();
-
-      // Limiter le mouvement aux bords de la fenêtre
-      if (iconRect.left <= 0 || iconRect.right >= window.innerWidth) {
-        xDirection *= -1;
-      }
-
-      if (iconRect.top <= 0 || iconRect.bottom >= window.innerHeight) {
-        yDirection *= -1;
-      }
-
-      // Déplacer l'icône à chaque "frame"
-      icon.style.left = parseInt(icon.style.left) + xDirection * movementDistance + 'px';
-      icon.style.top = parseInt(icon.style.top) + yDirection * movementDistance + 'px';
-    });
-
-    // Répéter la fonction de mouvement toutes les 20ms pour un effet continu
-    setTimeout(moveIcons, 20);
-  }
-
-  // Fonction pour vérifier si deux éléments se chevauchent
-  function isColliding(icon1, icon2) {
-    const rect1 = icon1.getBoundingClientRect();
-    const rect2 = icon2.getBoundingClientRect();
-
-    // Vérifie si les deux éléments se chevauchent
-    return !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
-  }
-
-  // Initialiser le mouvement des icônes
-  moveIcons();
-</script>
 <body>
-
     <h1 style="text-align: center; margin-top: 50px;">My Passions</h1>
 
     <div class="container">
         <!-- Sciences Category -->
-        <div class="category">
-            <img src="https://github.com/sergeenbois/Page/blob/ressource/AI.jpg?raw=true" alt="AI" class="category-img">
+        <div class="category" data-link="sciences.html">
+            <img src="https://github.com/sergeenbois/Page/blob/ressource/AI.png?raw=true" alt="AI" class="category-img">
             <h3>Sciences</h3>
             <p>Artificial Intelligence, Quantum Physics, and more!</p>
         </div>
-
+    
         <!-- Culture Category -->
-        <div class="category">
-            <img src="https://github.com/sergeenbois/Page/blob/ressource/Cinema.jpg?raw=true" alt="Cinema" class="category-img">
+        <div class="category" data-link="culture.html">
+            <img src="https://github.com/sergeenbois/Page/blob/ressource/Cinema.png?raw=true" alt="Cinema" class="category-img">
             <h3>Culture</h3>
-            <p>Movies, Books, Philosophy, and much more!</p>
+            <p>Movies, Books, Philosophy, and more!</p>
         </div>
-
+    
         <!-- Sports Category -->
-        <div class="category">
+        <div class="category" data-link="sports.html">
             <img src="https://github.com/sergeenbois/Page/blob/ressource/Foot.png?raw=true" alt="Football" class="category-img">
             <h3>Sports</h3>
             <p>Football, Tennis, Volley, and other sports!</p>
         </div>
     </div>
-    <section id="floating-icons">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/AI.jpg" class="floating-icon" alt="AI">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/Cinema.jpg" class="floating-icon" alt="Cinema">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/Foot.png" class="floating-icon" alt="Football">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/JV.jpg" class="floating-icon" alt="Games">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/Livre.png" class="floating-icon" alt="Books">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/Maths.png" class="floating-icon" alt="Mathematics">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/Philo.png" class="floating-icon" alt="Philosophy">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/Science.jpg" class="floating-icon" alt="Science">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/Tennis.jpg" class="floating-icon" alt="Tennis">
-        <img src="https://github.com/sergeenbois/Page/raw/ressource/Volley.png" class="floating-icon" alt="Volleyball">
-    </section>
 
 
+    <canvas id="tv-screen"></canvas>
+
+    <script src="script.js"></script>
 </body>
 </html>
