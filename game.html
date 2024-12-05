@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invader-like Game</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
+        canvas {
+            background-color: #222;
+            display: block;
+            margin: 0 auto;
+        }
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        button {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <button onclick="startGame()">Start Game</button>
+</div>
+
+<script>
+// Game variables
+let canvas = document.getElementById('gameCanvas');
+let ctx = canvas.getContext('2d');
+let player, bullets = [], enemies = [];
+let leftPressed = false, rightPressed = false, spacePressed = false;
+let score = 0;
+let gameInterval, enemyInterval;
+
+// Player setup
+function Player() {
+    this.width = 50;
+    this.height = 30;
+    this.x = canvas.width / 2 - this.width / 2;
+    this.speed = 5;
+    this.draw = function() {
+        ctx.fillStyle = 'green';
+        ctx.fillRect(this.x, canvas.height - this.height - 10, this.width, this.height);
+    };
+    this.move = function() {
+        if (leftPressed && this.x > 0) this.x -= this.speed;
+        if (rightPressed && this.x < canvas.width - this.width) this.x += this.speed;
+    };
+}
+
+// Bullet setup
+function Bullet(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = 5;
+    this.height = 10;
+    this.speed = 3;
+    this.draw = function() {
+        ctx.fillStyle = 'white';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    };
+    this.move = function() {
+        this.y -= this.speed;
+    };
+}
+
+// Enemy setup
+function Enemy(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = 40;
+    this.height = 30;
+    this.speed = 1;
+    this.draw = function() {
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    };
+    this.move = function() {
+        this.y += this.speed;
+    };
+}
+
+// Start the game
+function startGame() {
+    player = new Player();
+    bullets = [];
+    enemies = [];
+    score = 0;
+
+    // Game loop
+    gameInterval = setInterval(gameLoop, 1000 / 60);
+
+    // Enemy spawn interval
+    enemyInterval = setInterval(spawnEnemy, 1000);
+}
+
+// Game loop
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Move and draw player
+    player.move();
+    player.draw();
+
+    // Move and draw bullets
+    bullets.forEach(function(bullet, index) {
+        bullet.move();
+        bullet.draw();
+
+        // Check for bullet collision with enemies
+        enemies.forEach(function(enemy, enemyIndex) {
+            if (bullet.x < enemy.x + enemy.width && bullet.x + bullet.width > enemy.x &&
+                bullet.y < enemy.y + enemy.height && bullet.y + bullet.height > enemy.y) {
+                enemies.splice(enemyIndex, 1);
+                bullets.splice(index, 1);
+                score++;
+            }
+        });
+
+        // Remove bullets out of bounds
+        if (bullet.y < 0) bullets.splice(index, 1);
+    });
+
+    // Move and draw enemies
+    enemies.forEach(function(enemy) {
+        enemy.move();
+        enemy.draw();
+        if (enemy.y > canvas.height) {
+            gameOver();
+        }
+    });
+
+    // Draw score
+    ctx.fillStyle = 'white';
+    ctx.fillText('Score: ' + score, 10, 20);
+}
+
+// Spawn enemies
+function spawnEnemy() {
+    let enemyX = Math.random() * (canvas.width - 40);
+    enemies.push(new Enemy(enemyX, 0));
+}
+
+// Handle key presses
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') leftPressed = true;
+    if (e.key === 'ArrowRight') rightPressed = true;
+    if (e.key === ' ') spacePressed = true;
+});
+
+document.addEventListener('keyup', function(e) {
+    if (e.key === 'ArrowLeft') leftPressed = false;
+    if (e.key === 'ArrowRight') rightPressed = false;
+    if (e.key === ' ') spacePressed = false;
+});
+
+// Shoot bullets
+function shoot() {
+    let bullet = new Bullet(player.x + player.width / 2 - 2.5, canvas.height - player.height - 20);
+    bullets.push(bullet);
+}
+
+// Game over
+function gameOver() {
+    clearInterval(gameInterval);
+    clearInterval(enemyInterval);
+    alert('Game Over! Your score: ' + score);
+}
+
+// Shoot every time space is pressed
+setInterval(function() {
+    if (spacePressed) shoot();
+}, 100);
+
+// Start the game when the page loads
+window.onload = startGame;
+</script>
+</body>
+</html>
