@@ -48,20 +48,19 @@
 // Game variables
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
-let player, bullets = [], enemies = [], enemyBullets = [], bonuses = [];
+let player, bullets = [], enemies = [];
 let leftPressed = false, rightPressed = false, spacePressed = false;
-let score = 0, enemySpeed = 1, bulletSpeed = 3, playerSpeed = 5, doubleShot = false;
-let gameInterval, enemyInterval, bonusInterval, enemyBulletInterval;
+let score = 0;
+let gameInterval, enemyInterval;
 
 // Player setup
 function Player() {
     this.width = 50;
     this.height = 30;
     this.x = canvas.width / 2 - this.width / 2;
-    this.speed = playerSpeed;
-    this.invincible = false;
+    this.speed = 5;
     this.draw = function() {
-        ctx.fillStyle = this.invincible ? 'yellow' : 'red';
+        ctx.fillStyle = 'green';
         ctx.fillRect(this.x, canvas.height - this.height - 10, this.width, this.height);
     };
     this.move = function() {
@@ -76,7 +75,7 @@ function Bullet(x, y) {
     this.y = y;
     this.width = 5;
     this.height = 10;
-    this.speed = bulletSpeed;
+    this.speed = 3;
     this.draw = function() {
         ctx.fillStyle = 'white';
         ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -92,32 +91,13 @@ function Enemy(x, y) {
     this.y = y;
     this.width = 40;
     this.height = 30;
-    this.speed = enemySpeed;
+    this.speed = 1;
     this.draw = function() {
-        ctx.fillStyle = 'green';
+        ctx.fillStyle = 'red';
         ctx.fillRect(this.x, this.y, this.width, this.height);
     };
     this.move = function() {
         this.y += this.speed;
-    };
-    this.shoot = function() {
-        enemyBullets.push(new Bullet(this.x + this.width / 2 - 2.5, this.y + this.height));
-    };
-}
-
-// Bonus setup
-function Bonus(x, y, type) {
-    this.x = x;
-    this.y = y;
-    this.width = 30;
-    this.height = 30;
-    this.type = type; // 'double', 'speed', 'shield'
-    this.draw = function() {
-        ctx.fillStyle = this.type === 'double' ? 'cyan' : this.type === 'speed' ? 'orange' : 'purple';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-    };
-    this.move = function() {
-        this.y += 1;
     };
 }
 
@@ -126,22 +106,13 @@ function startGame() {
     player = new Player();
     bullets = [];
     enemies = [];
-    enemyBullets = [];
-    bonuses = [];
     score = 0;
-    enemySpeed = 1;
-    bulletSpeed = 3;
-    playerSpeed = 5;
-    doubleShot = false;
 
     // Game loop
     gameInterval = setInterval(gameLoop, 1000 / 60);
-    // Spawn enemies
+
+    // Enemy spawn interval
     enemyInterval = setInterval(spawnEnemy, 1000);
-    // Spawn bonuses
-    bonusInterval = setInterval(spawnBonus, 2000);
-    // Spawn enemy bullets
-    enemyBulletInterval = setInterval(enemyShoot, 1000);
 }
 
 // Game loop
@@ -164,7 +135,6 @@ function gameLoop() {
                 enemies.splice(enemyIndex, 1);
                 bullets.splice(index, 1);
                 score++;
-                dropBonus(enemy.x, enemy.y); // Drop a bonus
             }
         });
 
@@ -181,33 +151,6 @@ function gameLoop() {
         }
     });
 
-    // Move and draw enemy bullets
-    enemyBullets.forEach(function(bullet, index) {
-        bullet.move();
-        bullet.draw();
-        if (bullet.y > canvas.height) enemyBullets.splice(index, 1);
-        if (bullet.x < player.x + player.width && bullet.x + bullet.width > player.x &&
-            bullet.y < player.y + player.height && bullet.y + bullet.height > player.y) {
-            if (!player.invincible) {
-                gameOver();
-            }
-            enemyBullets.splice(index, 1);
-        }
-    });
-
-    // Move and draw bonuses
-    bonuses.forEach(function(bonus, index) {
-        bonus.move();
-        bonus.draw();
-
-        // Check for bonus collision with player
-        if (bonus.x < player.x + player.width && bonus.x + bonus.width > player.x &&
-            bonus.y < player.y + player.height && bonus.y + bonus.height > player.y) {
-            applyBonus(bonus.type);
-            bonuses.splice(index, 1);
-        }
-    });
-
     // Draw score
     ctx.fillStyle = 'white';
     ctx.fillText('Score: ' + score, 10, 20);
@@ -217,42 +160,6 @@ function gameLoop() {
 function spawnEnemy() {
     let enemyX = Math.random() * (canvas.width - 40);
     enemies.push(new Enemy(enemyX, 0));
-}
-
-// Spawn bonuses
-function spawnBonus() {
-    if (enemies.length === 0) return;
-
-    let bonusType = ['double', 'speed', 'shield'][Math.floor(Math.random() * 3)];
-    let enemy = enemies[Math.floor(Math.random() * enemies.length)];
-    bonuses.push(new Bonus(enemy.x + Math.random() * enemy.width, enemy.y, bonusType));
-}
-
-// Drop bonus when an enemy is killed
-function dropBonus(x, y) {
-    let bonusType = ['double', 'speed', 'shield'][Math.floor(Math.random() * 3)];
-    bonuses.push(new Bonus(x, y, bonusType));
-}
-
-// Apply bonus effect
-function applyBonus(type) {
-    if (type === 'double') doubleShot = true;
-    if (type === 'speed') playerSpeed += 2;
-    if (type === 'shield') player.invincible = true;
-
-    // Remove bonus after a short duration (for shield)
-    if (type === 'shield') {
-        setTimeout(() => player.invincible = false, 5000);
-    }
-}
-
-// Enemy shoot bullets
-function enemyShoot() {
-    enemies.forEach(enemy => {
-        if (Math.random() < 0.1) { // 10% chance of shooting
-            enemy.shoot();
-        }
-    });
 }
 
 // Handle key presses
@@ -268,27 +175,26 @@ document.addEventListener('keyup', function(e) {
     if (e.key === ' ') spacePressed = false;
 });
 
-// Fire bullets
-function fireBullet() {
-    let x = player.x + player.width / 2 - 2.5;
-    let y = canvas.height - player.height - 10;
-    bullets.push(new Bullet(x, y));
-    if (doubleShot) {
-        bullets.push(new Bullet(x - 10, y)); // Fire a second bullet to the left
-        bullets.push(new Bullet(x + 10, y)); // Fire a second bullet to the right
-    }
+// Shoot bullets
+function shoot() {
+    let bullet = new Bullet(player.x + player.width / 2 - 2.5, canvas.height - player.height - 20);
+    bullets.push(bullet);
 }
 
-// Game Over
+// Game over
 function gameOver() {
     clearInterval(gameInterval);
     clearInterval(enemyInterval);
-    clearInterval(bonusInterval);
-    clearInterval(enemyBulletInterval);
-    alert('Game Over! Your score is: ' + score);
+    alert('Game Over! Your score: ' + score);
 }
 
-</script>
+// Shoot every time space is pressed
+setInterval(function() {
+    if (spacePressed) shoot();
+}, 100);
 
+// Start the game when the page loads
+window.onload = startGame;
+</script>
 </body>
 </html>
