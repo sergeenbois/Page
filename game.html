@@ -61,7 +61,7 @@ function Player() {
     this.speed = playerSpeed;
     this.invincible = false;
     this.draw = function() {
-        ctx.fillStyle = this.invincible ? 'yellow' : 'green';
+        ctx.fillStyle = this.invincible ? 'yellow' : 'red';
         ctx.fillRect(this.x, canvas.height - this.height - 10, this.width, this.height);
     };
     this.move = function() {
@@ -94,7 +94,7 @@ function Enemy(x, y) {
     this.height = 30;
     this.speed = enemySpeed;
     this.draw = function() {
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'green';
         ctx.fillRect(this.x, this.y, this.width, this.height);
     };
     this.move = function() {
